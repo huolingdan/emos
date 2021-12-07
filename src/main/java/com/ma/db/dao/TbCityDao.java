@@ -1,0 +1,10 @@
+package com.ma.db.dao;
+
+import com.ma.db.pojo.TbCity;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface TbCityDao {
+
+    public String searchCode(String city);
+}

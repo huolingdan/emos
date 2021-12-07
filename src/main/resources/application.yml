@@ -1,0 +1,103 @@
+
+#配置Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 200
+      min-spare: 30
+    connection-timeout: 5000ms
+  port: 8081
+  servlet:
+    context-path: /emos-wx-api
+
+#配置Mysql数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/emos?userUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 123456
+      initial-size: 4
+      max-active: 8
+      min-idle: 4
+      max-wait: 60000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+# 配置Redis数据源
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: abc123456
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 4
+
+# 配置MongoDB
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: emos
+      authentication-database: admin
+      username: admin
+      password: abc123456
+# 配置 邮件服务 SMTP服务器
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: tyutrjmfj@163.com
+    password: ma7456321
+
+# 配置Mybatis
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+  type-aliases-package: com.ma.db.pojo
+  configuration:
+    # 打印 sql语句日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 驼峰命名
+    map-underscore-to-camel-case: true
+
+# 配置日志输出
+logging:
+  level:
+    root: info
+    com.ma.db.dao: warn
+  pattern:
+    console: "%d{HH:mm:ss} %-5level %msg%n"
+
+# 配置 jwt属性值
+emos:
+  jwt:
+    secret: abc123456
+    expire: 5
+    cache-expire: 10
+  face:
+    createFaceModelUrl: http://47.96.191.52:3000/create_face_model
+    checkinUrl: http://47.96.191.52:3000/checkin
+  email:
+    system: 1540825196@qq.com
+    hr: 1540825196@163.com
+  image-folder: D:/emos/image
+  code: 974038F061B0B5F61111
+  recieveNotify: http://
+  workflow:
+    url: http://
+wx:
+  app-id: wx92e5d7815102d0f4
+  app-secret: 989137299dc5696850fecbb343f43272
+
+trtc:
+  appid: trtc的appid
+  key: TRTC密钥
+  expire: 86400
